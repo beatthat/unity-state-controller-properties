@@ -5,6 +5,19 @@ using UnityEngine.Events;
 
 namespace BeatThat
 {
+	/// <summary>
+	/// Base class for a float state param that exposes the (StateController/Animator) param name as a unity-editable property
+	/// and sets the default value of that param name to the camel-case version of the class name.
+	/// 
+	/// So the common usage is to extend this class for each param and use as follows:
+	/// 
+	/// <code>
+	/// public class MyParam1 : FloatStateProperty {} // so param name will be 'myParam1' by default
+	/// 
+	/// var someController; // this component has an AnimatorController attached and also an instace of MyParam1
+	/// someController.SetFloat<MyParam1>(1.234f); // extension setters/getters from properties pkg
+	/// </code>
+	/// </summary>
 	public class FloatStateProperty : FloatStateParamBase
 	{
 		[FormerlySerializedAs("m_param")]
@@ -33,6 +46,9 @@ namespace BeatThat
 		#endif
 	}
 
+	/// <summary>
+	/// Base class for a HasFloat component that gets and sets a param on a (sibling)StateController/Animator.
+	/// </summary>
 	public abstract class FloatStateParamBase : HasFloat, Param, IHasValueChangedEvent<float>
 	{
 		public UnityEvent<float> onValueChanged 

@@ -2,7 +2,10 @@
 namespace BeatThat
 {
 	/// <summary>
-	/// Base class for int state params that can get their value by binding to an IntProp
+	/// Base class for bool state params that can get their value by binding to an bool param on a StateController/Animator.
+	/// Usually you would extend IntStatePropertyObserver instead of this class;
+	/// use this class when you DON'T want to use the
+	/// 'param name is a public property w same name as class' convention
 	/// </summary>
 	public abstract class IntStatePropObserver : IntStateParamBase
 	{
@@ -21,6 +24,12 @@ namespace BeatThat
 
 	}
 
+	// <summary>
+	/// Base class for a BoolStateProperty that can get its value by binding to a BoolProp
+	/// and that uses the default 'param name is a public property w same name as class' behaviour 
+	/// from BoolStateProperty
+	/// </code>
+	/// </summary>
 	public class IntStatePropertyObserver : IntStateProperty
 	{
 		public IntProp m_driver;

@@ -4,6 +4,20 @@ using UnityEngine.Serialization;
 
 namespace BeatThat
 {
+	/// <summary>
+	/// Base class for a (Invocable) component param that exposes 
+	/// the (StateController/Animator) param name as a unity-editable property
+	/// and sets the default value of that param name to the camel-case version of the class name.
+	/// 
+	/// So the common usage is to extend this class for each param and use as follows:
+	/// 
+	/// <code>
+	/// public class MyParam1 : TriggerStateProperty {} // so param name will be 'myParam1' by default
+	/// 
+	/// var someController; // this component has an AnimatorController attached and also an instace of MyParam1
+	/// someController.Invoke<MyParam1>(); // extension method from properties pkg, fires the trigger
+	/// </code>
+	/// </summary>
 	public class TriggerStateProperty : TriggerStateParamBase
 	{
 		[FormerlySerializedAs("m_param")]
@@ -33,6 +47,9 @@ namespace BeatThat
 
 	}
 
+	/// <summary>
+	/// Base class for an Invocable component that fires a trigger on a (sibling)StateController/Animator.
+	/// </summary>
 	public abstract class TriggerStateParamBase : MonoBehaviour, Param, Invocable 
 	{
 		public bool m_debug;

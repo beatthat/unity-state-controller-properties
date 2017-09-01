@@ -5,6 +5,19 @@ using UnityEngine.Events;
 
 namespace BeatThat
 {
+	/// <summary>
+	/// Base class for a BoolStateParam that exposes the (Animator) param name as a unity-editable property
+	/// and sets the default value of that param name to the camel-case version of the class name.
+	/// 
+	/// So the common usage is to extend this class for each param and use as follows:
+	/// 
+	/// <code>
+	/// public class MyBoolParam : BoolStateProperty {} // so param name will be 'myBoolParam' by default
+	/// 
+	/// var someController; // this component has an AnimatorController attached and also an instace of MyBoolParam
+	/// someController.SetBool<MyBoolParam>(true); // extension setters/getters from properties pkg
+	/// </code>
+	/// </summary>
 	public class BoolStateProperty : BoolStateParamBase
 	{
 		[FormerlySerializedAs("m_param")]
@@ -32,8 +45,18 @@ namespace BeatThat
 		}
 		#endif
 	}
+
+	/// <summary>
+	/// Base class for a HasBool component that gets and sets a param on a (sibling)StateController.
+	/// </summary>
 	public abstract class BoolStateParamBase : HasBool, Param, IHasValueChangedEvent<bool>
 	{
+		/// <summary>
+		/// Dispatched when the value changes.
+		/// NOTE: only dispatches if value is changed via the property component (as opposed to, say, an underlying Animator),
+		/// so any time this component is in play, make sure to use *only* the component for get/set operations.
+		/// </summary>
+		/// <value>the new value</value>
 		public UnityEvent<bool> onValueChanged 
 		{ 
 			get { return m_valueChanged?? (m_valueChanged = new BoolEvent()); } 
