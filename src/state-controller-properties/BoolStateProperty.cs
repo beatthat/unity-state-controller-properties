@@ -47,7 +47,8 @@ namespace BeatThat
 	}
 
 	/// <summary>
-	/// Base class for a HasBool component that gets and sets a param on a (sibling)StateController.
+	/// Exposes a bool param on a (sibling)StateController.
+	/// Extends HasBool to make it as interchangable as possible with other params you might assign to a component via Unity editor.
 	/// </summary>
 	public abstract class BoolStateParamBase : HasBool, Param, IHasValueChangedEvent<bool>
 	{

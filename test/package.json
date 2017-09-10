@@ -8,7 +8,7 @@
     "clean": "rm -rf node_modules package-lock.json yarn.lock Library Temp Assets"
   },
   "dependencies": {
-    "unity-state-controller-properties": "../unity-state-controller-properties-0.0.2.tgz"
+    "state-controller-properties": "../state-controller-properties-0.0.4.tgz"
   },
   "devDependencies": {
     "babel-core": "^5.8.23",

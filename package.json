@@ -1,11 +1,12 @@
 {
-  "name": "unity-state-controller-properties",
-  "version": "0.0.2",
+  "name": "state-controller-properties",
+  "scope": "ape",
+  "version": "0.0.4",
   "description": "Property components that enable get, set, and observe for (Animator) StateController properties",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/beatthat/unity-state-controller-properties.git"
+    "url": "git+https://github.com/beatthat/state-controller-properties.git"
   },
   "files": [
     "index.js",
@@ -15,20 +16,22 @@
   "author": "larrykirschner@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/beatthat/unity-state-controller-properties/issues"
+    "url": "https://github.com/beatthat/state-controller-properties/issues"
   },
-  "homepage": "https://github.com/beatthat/unity-state-controller-properties",
+  "homepage": "https://github.com/beatthat/state-controller-properties",
   "scripts": {
     "postinstall": "node scripts/postinstall.js",
-    "install:test": "rm -f *.tgz && npm pack && cd test && npm run clean && npm install"
+    "install:test": "rm -f *.tgz && npm pack && cd test && npm run clean && npm install",
+    "clean": "rm -f *.tgz && cd test && npm run clean",
+    "sync:test2src": "rsync -rv --include '*/' --include '*.cs' --exclude '*' --prune-empty-dirs test/Assets/Plugins/${npm_package_scope}/${npm_package_name}/ ./src/${npm_package_name}/",
+    "pub:tag": "git add -A && git commit -m ${npm_package_version} && git tag -a ${npm_package_version} -m ${npm_package_version} && git push origin master && git push origin ${npm_package_version}"
   },
   "dependencies": {
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
-    "unity-state-controllers": "beatthat/unity-state-controllers#semver:^0.0.1",
-    "unity-properties": "beatthat/unity-properties#semver:^0.0.6",
-    "unity-property-bindings": "beatthat/unity-property-bindings#semver:^0.0.1",
-    "unity-extensions": "beatthat/unity-extensions#semver:^0.0.2",
-    "unity-utils": "beatthat/unity-utils#semver:^0.0.5"
+    "properties": "github:beatthat/properties#semver:^0.0.12",
+    "property-bindings": "github:beatthat/property-bindings#semver:^0.0.2",
+    "property-interfaces": "github:beatthat/property-interfaces#semver:^0.0.3",
+    "state-controllers": "beatthat/state-controllers#semver:^0.0.4"
   }
 }
