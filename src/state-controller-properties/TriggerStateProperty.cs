@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Serialization;
+using System;
+
+#if UNITY_EDITOR
+using BeatThat.ParamsEditorExtensions;
+#endif
 
 namespace BeatThat
 {
+	
+
 	/// <summary>
 	/// Base class for a (Invocable) component param that exposes 
 	/// the (StateController/Animator) param name as a unity-editable property
@@ -27,7 +34,8 @@ namespace BeatThat
 		virtual protected string propertyNameDefault 
 		{ 
 			get { 
-				return this.DefaultParamName();
+				Debug.Log ("[" + Time.frameCount + "] DefaultParamNameRemovingSuffixes=" + this.DefaultParamNameRemovingSuffixes ("Trigger", "Param", "Prop"));
+				return this.DefaultParamNameRemovingSuffixes("Trigger", "Param", "Prop");
 			}
 		}
 
@@ -39,9 +47,10 @@ namespace BeatThat
 		}
 
 		#if UNITY_EDITOR
-		void Reset()
+		override protected void Reset()
 		{
 			m_property = this.propertyNameDefault;
+			base.Reset ();
 		}
 		#endif
 
@@ -139,11 +148,12 @@ namespace BeatThat
 
 		public abstract string param { get; }
 
+		public Type paramType { get { return typeof(Invocable); } }
+
 		public StateController state { get { return m_state?? (m_state = this.AddIfMissing<StateController, AnimatorController>()); } }
 		public StateController m_state;
 
-
-		void Start()
+		virtual protected void Start()
 		{
 			this.didStart = true;
 
@@ -153,6 +163,16 @@ namespace BeatThat
 		}
 
 		private bool didStart { get; set; }
+
+
+
+		#if UNITY_EDITOR
+		virtual protected void Reset()
+		{
+			this.ValidateAnimatorControllerParam (true);
+		}
+		#endif
+
 
 		void OnDisable()
 		{

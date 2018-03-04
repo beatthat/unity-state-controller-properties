@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+
+
 namespace BeatThat
 {
 	/// <summary>
@@ -7,19 +9,16 @@ namespace BeatThat
 	/// use this class when you DON'T want to use the
 	/// 'param name is a public property w same name as class' convention
 	/// </summary>
+	[Obsolete("behaviour moved to base class")]
 	public abstract class IntStatePropObserver : IntStateParamBase
 	{
 		public IntProp m_driver;
 		private BindIntToInt m_binding;
 
-		void Awake()
+		override protected void Awake()
 		{
-			if(m_driver != null) {
-				m_binding = this.gameObject.AddComponent<BindIntToInt>();
-				m_binding.m_defaultValue = m_resetValue;
-				m_binding.ConfigureDriver(m_driver);
-				m_binding.property = this;
-			}
+			this.enablePropertyBinding = true;
+			base.Awake();
 		}
 
 	}
@@ -30,28 +29,13 @@ namespace BeatThat
 	/// from BoolStateProperty
 	/// </code>
 	/// </summary>
+	[Obsolete("behaviour moved to base class")]
 	public class IntStatePropertyObserver : IntStateProperty
 	{
-		public IntProp m_driver;
-		private BindIntToInt m_binding;
-
 		override protected void Awake()
 		{
+			this.enablePropertyBinding = true;
 			base.Awake();
-
-			if(m_driver != null) {
-				InitWithDriver(m_driver);	
-			}
 		}
-
-		public void InitWithDriver(IntProp driver)
-		{
-			m_driver = driver;
-			m_binding = this.gameObject.AddComponent<BindIntToInt>();
-			m_binding.m_defaultValue = m_resetValue;
-			m_binding.ConfigureDriver(m_driver);
-			m_binding.property = this;
-		}
-
 	}
 }

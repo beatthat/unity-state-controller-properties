@@ -1,6 +1,10 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using BeatThat.ParamsEditorExtensions;
+#endif
+
 namespace BeatThat
 {
 	[CustomEditor(typeof(TriggerStateParamBase), true)]
@@ -9,16 +13,38 @@ namespace BeatThat
 	{
 		public override void OnInspectorGUI()
 		{
+			var param = this.target as TriggerStateParamBase;
+			var so = this.serializedObject;
+			var paramNameProp = so.FindProperty("m_property");
+
+			if (paramNameProp != null)
+			{
+				param.HandleParamUndefinedInController(paramNameProp);
+			}
+			else
+			{
+				param.WarnIfParamUndefined();
+			}
+				
+			if (!Application.isPlaying)
+			{
+				so.ApplyModifiedProperties();
+				base.OnInspectorGUI();
+				return;
+			}	
+
+			so.ApplyModifiedProperties();
+
 			OnTriggerStateParamGUI();
 		}
 
 		virtual protected void OnTriggerStateParamGUI() 
 		{
-			var param = this.target as TriggerStateParamBase;
-			param.ResetPropertyToDefaultIfEmpty(this.serializedObject);
-			param.WarnIfParamUndefined();
-
-			base.OnInspectorGUI();
+//			var param = this.target as TriggerStateParamBase;
+//			param.ResetPropertyToDefaultIfEmpty(this.serializedObject);
+//			param.WarnIfParamUndefined();
+//
+//			base.OnInspectorGUI();
 			DrawInvokeButton();
 		}
 

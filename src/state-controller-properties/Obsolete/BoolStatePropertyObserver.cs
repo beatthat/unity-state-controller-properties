@@ -1,6 +1,9 @@
-﻿
+﻿using System;
+
+
 namespace BeatThat
 {
+	[Obsolete("functionality moved to base class BoolStateParamBase")]
 	/// <summary>
 	/// Base class for bool state params that can get their value by binding to an BoolProp.
 	/// Usually you would extend BoolStatePropertyObserver instead of this class;
@@ -9,21 +12,15 @@ namespace BeatThat
 	/// </summary>
 	public abstract class BoolStatePropObserver : BoolStateParamBase
 	{
-		public BoolProp m_driver;
-		private BindBoolToBool m_binding;
-
-		void Awake()
+		override protected void Awake()
 		{
-			if(m_driver != null) {
-				m_binding = this.gameObject.AddComponent<BindBoolToBool>();
-				m_binding.m_defaultValue = m_resetValue;
-				m_binding.ConfigureDriver(m_driver);
-				m_binding.property = this;
-			}
+			base.m_enablePropertyBinding = true;
+			base.Awake ();
 		}
 
 	}
 
+	[Obsolete("functionality moved to base class BoolStateParamBase")]
 	/// <summary>
 	/// Base class for a BoolStateProperty that can get its value by binding to a BoolProp
 	/// and that uses the default 'param name is a public property w same name as class' behaviour 
@@ -32,26 +29,10 @@ namespace BeatThat
 	/// </summary>
 	public class BoolStatePropertyObserver : BoolStateProperty
 	{
-		public BoolProp m_driver;
-		private BindBoolToBool m_binding;
-
 		override protected void Awake()
 		{
-			base.Awake();
-
-			if(m_driver != null) {
-				InitWithDriver(m_driver);
-			}
+			base.m_enablePropertyBinding = true;
+			base.Awake ();
 		}
-
-		public void InitWithDriver(BoolProp driver)
-		{
-			m_driver = driver;
-			m_binding = this.gameObject.AddComponent<BindBoolToBool>();
-			m_binding.m_defaultValue = m_resetValue;
-			m_binding.ConfigureDriver(m_driver);
-			m_binding.property = this;
-		}
-
 	}
 }
