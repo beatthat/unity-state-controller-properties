@@ -1,6 +1,6 @@
 {
   "name": "state-controller-properties",
-  "scope": "ape",
+  "scope": "beatthat",
   "version": "1.0.0",
   "description": "Property components that enable get, set, and observe for (Animator) StateController properties",
   "main": "index.js",
@@ -11,7 +11,9 @@
   "files": [
     "index.js",
     "scripts",
-    "src"
+    "src",
+    "Runtime",
+    "Samples"
   ],
   "author": "larrykirschner@gmail.com",
   "license": "MIT",
@@ -34,10 +36,9 @@
   "dependencies": {
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
-    "properties": "github:beatthat/properties#semver:^1.0.0",
-    "property-bindings": "github:beatthat/property-bindings#semver:^1.0.1",
+    "property-bindings": "github:beatthat/property-bindings#semver:^1.0.0",
     "property-interfaces": "github:beatthat/property-interfaces#semver:^1.0.0",
-    "state-controllers": "beatthat/state-controllers#semver:^1.0.1",
+    "state-controllers": "beatthat/state-controllers#semver:^1.0.0",
     "path": "^0.12.7",
     "unity-npm-utils": "github:beatthat/unity-npm-utils#semver:^1.0.0"
   },
