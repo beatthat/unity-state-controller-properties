@@ -1,7 +1,7 @@
 {
   "name": "state-controller-properties",
   "scope": "beatthat",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Property components that enable get, set, and observe for (Animator) StateController properties",
   "main": "index.js",
   "repository": {
