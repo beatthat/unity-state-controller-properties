@@ -28,9 +28,8 @@ namespace BeatThat.StateControllers
 			}
 		}
 
-		override protected void Awake()
+		virtual protected void Awake()
 		{
-			base.Awake ();
 			if(string.IsNullOrEmpty(this.param)) {
 				m_property = this.propertyNameDefault;
 			}

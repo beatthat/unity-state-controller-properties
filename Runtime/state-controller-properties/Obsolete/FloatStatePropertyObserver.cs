@@ -16,10 +16,10 @@ namespace BeatThat.StateControllers
 		public FloatProp m_driver;
 		private BindFloatToFloat m_binding;
 
-		override protected void Awake()
+        override protected void OnEnable()
 		{
 			base.bindOrDrivePropertyOptions = BindOrDrivePropertyOptions.BindToProperty;
-			base.Awake ();
+            base.OnEnable ();
 		}
 
 	}
@@ -33,10 +33,10 @@ namespace BeatThat.StateControllers
 	[Obsolete("functionality moved to base class")]
 	public class FloatStatePropertyObserver : FloatStateProperty
 	{
-		override protected void Awake()
+		override protected void OnEnable()
 		{
 			base.bindOrDrivePropertyOptions = BindOrDrivePropertyOptions.BindToProperty;
-			base.Awake ();
+            base.OnEnable ();
 		}
 	}
 }

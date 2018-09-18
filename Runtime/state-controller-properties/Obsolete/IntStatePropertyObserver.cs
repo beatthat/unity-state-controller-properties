@@ -16,10 +16,10 @@ namespace BeatThat.StateControllers
 		public IntProp m_driver;
 		private BindIntToInt m_binding;
 
-		override protected void Awake()
+		override protected void OnEnable()
 		{
 			this.bindOrDrivePropertyOptions = BindOrDrivePropertyOptions.BindToProperty;
-			base.Awake();
+            base.OnEnable();
 		}
 
 	}
@@ -33,10 +33,10 @@ namespace BeatThat.StateControllers
 	[Obsolete("behaviour moved to base class")]
 	public class IntStatePropertyObserver : IntStateProperty
 	{
-		override protected void Awake()
+        override protected void OnEnable()
 		{
 			this.bindOrDrivePropertyOptions = BindOrDrivePropertyOptions.BindToProperty;
-			base.Awake();
+            base.OnEnable();
 		}
 	}
 }

@@ -13,10 +13,10 @@ namespace BeatThat.StateControllers
 	/// </summary>
 	public abstract class BoolStatePropObserver : BoolStateParamBase
 	{
-		override protected void Awake()
+        override protected void OnEnable()
 		{
 			this.bindOrDrivePropertyOptions = BindOrDrivePropertyOptions.BindToProperty;
-			base.Awake ();
+            base.OnEnable();
 		}
 
 	}
@@ -30,10 +30,10 @@ namespace BeatThat.StateControllers
 	/// </summary>
 	public class BoolStatePropertyObserver : BoolStateProperty
 	{
-		override protected void Awake()
+        override protected void OnEnable()
 		{
 			this.bindOrDrivePropertyOptions = BindOrDrivePropertyOptions.BindToProperty;
-			base.Awake ();
+            base.OnEnable ();
 		}
 	}
 }
