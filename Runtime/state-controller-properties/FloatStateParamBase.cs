@@ -28,9 +28,9 @@ namespace BeatThat.StateControllers
 
 		override public bool sendsValueObjChanged { get { return true; } }
 
-		override protected void _SetValue(float val) 
+        override protected void _SetValue(float v) 
 		{
-			EnsureValue (val);
+			EnsureValue (v);
 
 			if(!this.isActiveAndEnabled) {
 				return;
@@ -43,18 +43,18 @@ namespace BeatThat.StateControllers
 				return;
 			}
 
-			s.SetFloat(this.param, val, PropertyEventOptions.Force, StateParamOptions.RequireParam); 
+			s.SetFloat(this.param, v, PropertyEventOptions.Force, StateParamOptions.RequireParam); 
 		}
 
 		public StateController state { get { return m_state?? (m_state = this.AddIfMissing<StateController, AnimatorController>()); } }
 		public StateController m_state;
 
-		#if UNITY_EDITOR
+#if UNITY_EDITOR
 		virtual protected void Reset()
 		{
 			this.ValidateAnimatorControllerParam (createIfMissing:true);
 		}
-		#endif
+#endif
 
 		private IEnumerator SetValueWhenReady()
 		{
